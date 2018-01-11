@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 namespace HighQuantity
 {
     #region FirstChapter 基本语言要素
+
     //class Program
     //{
     //    //static void Main(string[] args)
@@ -457,7 +458,7 @@ namespace HighQuantity
     //        return string.Format("{0}{1}", LastName, FirstName);
     //    }
     //}
-    ////class Person 
+    ////class Person
     ////{
     ////    public string IDCode { get; set; }
     ////    public string FirstName { get; set; }
@@ -611,7 +612,7 @@ namespace HighQuantity
     #endregion
 
     #region SecondChapter 集合和LINQ
-    
+
     #region 16 元素数量可变的情况下不应使用数组
     //class Program
     //{
@@ -1672,7 +1673,7 @@ namespace HighQuantity
 
     #region 46 显式释放资源需继承接口IDisposable 47 即使提供了显式释放方法，也应该在终结器中提供隐式清理 48 Dispose方法应允许被多次调用
     #endregion
-    #region 49 在Dispose模式中应提取一个受保护的虚方法 50 在Dispose模式中应区别对待托管资源和非托管资源 
+    #region 49 在Dispose模式中应提取一个受保护的虚方法 50 在Dispose模式中应区别对待托管资源和非托管资源
     #endregion
     #region 51 具有可释放字段的类型或拥有本机资源的类型应该是可释放的 52 及时释放资源 53 必要时应将不再使用的对象引用赋值为null
     //public class SampleClass : IDisposable
@@ -2550,7 +2551,98 @@ namespace HighQuantity
 
     #region SixthChapter 异步、多线程、任务和并行
 
+    #region 71 区分异步和多线程应用场景
+    //计算密集型工作，采用多线程。
+    //IO密集型工作，采用异步机制。
+    //class Program
+    //{
+    //    private void ButtonGetPage_Click(object sender, EventArgs e)
+    //    {
+    //        Thread t = new Thread(() =>
+    //        {
+    //            var request = HttpWebRequest.Create("http://www.cnblogs.com/luminj");
+    //            var response = request.GetResponse();
+    //            var stream = response.GetResponseStream();
+    //            using (StreamReader reader = new StreamReader(stream))
+    //            {
+    //                var content = reader.ReadLine();
+    //                //textBoxPage.Text = content;
+    //            }
+    //        });
+    //        t.Start();
+    //    }
+    //    private void ButtonGetPage_Click1(object sender,EventArgs e)
+    //    {
+    //        var request = HttpWebRequest.Create("http://www.sina.com.cn");
+    //        request.BeginGetResponse(this.AsyncCallbacklmpl, request);
+    //    }
 
+    //    private void AsyncCallbacklmpl(IAsyncResult ar)
+    //    {
+    //        WebRequest request = ar.AsyncState as WebRequest;
+    //        var response = request.EndGetResponse(ar);
+    //        var stream = response.GetResponseStream();
+    //        using (StreamReader reader = new StreamReader(stream))
+    //        {
+    //            var content = reader.ReadLine();
+    //            //txtBoxPage.Text = content;
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 72 在线程同步中使用信号量
+
+    #endregion
+
+    #region 73 避免锁定不恰当的同步对象
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Program p = new Program();
+    //        p.ButtonStartThreads_Click();
+    //    }
+    //    AutoResetEvent autoSet = new AutoResetEvent(false);
+    //    List<string> tempList = new List<string>() { "init0", "init1", "init2" };
+    //    //private void ButtonStartThreads_Click(object sender,EventArgs e)
+    //    private void ButtonStartThreads_Click()
+    //    {
+    //        object syncObj = new object();
+    //        Thread t1 = new Thread(() =>
+    //        {
+    //            //确保等待t2开始之后才运行下面的代码
+    //            autoSet.WaitOne();
+    //            lock (syncObj)
+    //            {
+    //                foreach (var item in tempList)
+    //                {
+    //                    Thread.Sleep(1000);
+    //                }
+    //            }
+    //        })
+    //        {
+    //            IsBackground = true
+    //        };
+    //        t1.Start();
+    //        Thread t2 = new Thread(() =>
+    //        {
+    //            //通知t1可以执行代码
+    //            autoSet.Set();
+    //            //沉睡1秒是为了确保删除操作在t1的迭代过程中
+    //            Thread.Sleep(1000);
+    //            lock (syncObj)
+    //            {
+    //                tempList.RemoveAt(1);
+    //            }
+    //        })
+    //        {
+    //            IsBackground = true
+    //        };
+    //        t2.Start();
+    //    }
+    //}
+    #endregion
 
     #endregion
 }
