@@ -2644,5 +2644,173 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 74 警惕线程的IsBackground
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Thread t = new Thread(() =>
+    //        {
+    //            Console.WriteLine("线程开始工作......");
+    //            //省略工作代码
+    //            Console.ReadKey();
+    //            Console.WriteLine("线程结束");
+    //        });
+    //        //注意，默认就为false
+    //        t.IsBackground = false;
+    //        t.Start();
+    //        Console.WriteLine("主线程结束");
+    //    }
+    //}
+    #endregion
+
+    #region 75 警惕线程不会立即启动
+    //class Program
+    //{
+    //    static int id = 0;
+    //    //static void Main()
+    //    //{
+    //    //    for (int i = 0; i < 10; i++, id++)
+    //    //    {
+    //    //        Thread t = new Thread(() =>
+    //    //        {
+    //    //            Console.WriteLine(string.Format("{0}:{1}", Thread.CurrentThread.Name, id));
+    //    //        })
+    //    //        {
+    //    //            Name = string.Format("Thread{0}", i),
+    //    //            IsBackground = true
+    //    //        };
+    //    //        t.Start();
+    //    //    }
+    //    //    Console.ReadLine();
+    //    //}
+    //    static void Main()
+    //    {
+    //        for (int i = 0; i < 10; i++,id++)
+    //        {
+    //            NewMethod1(i, id);
+    //        }
+    //        Console.ReadLine();
+    //    }
+
+    //    private static void NewMethod1(int i, int realTimeID)
+    //    {
+    //        Thread t = new Thread(() =>
+    //        {
+    //            Console.WriteLine(string.Format("{0}:{1}", Thread.CurrentThread.Name, realTimeID));
+    //        })
+    //        {
+    //            Name = string.Format("Thread{0}", i),
+    //            IsBackground = true
+    //        };
+    //        t.Start();
+    //    }
+    //}
+    #endregion
+
+    #region 76 警惕线程的优先级
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        long t1Num = 0;
+    //        long t2Num = 0;
+    //        CancellationTokenSource cts = new CancellationTokenSource();
+    //        Thread t1 = new Thread(() =>
+    //        {
+    //            while (true && !cts.Token.IsCancellationRequested)
+    //            {
+    //                t1Num++;
+    //            }
+    //        })
+    //        {
+    //            IsBackground = true,
+    //            Priority = ThreadPriority.Highest
+    //        };
+    //        t1.Start();
+    //        Thread t2 = new Thread(() =>
+    //        {
+    //            while (true && !cts.Token.IsCancellationRequested)
+    //            {
+    //                t2Num++;
+    //            }
+    //        })
+    //        {
+    //            IsBackground = true
+    //        };
+    //        t2.Start();
+    //        Console.ReadLine();
+    //        //停止线程
+    //        cts.Cancel();
+    //        Console.WriteLine("t1Num:" + t1Num.ToString());
+    //        Console.WriteLine("t2Num:" + t2Num.ToString());
+    //    }
+    //}
+    #endregion
+
+    #region 77 正确停止线程
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        CancellationTokenSource cts = new CancellationTokenSource();
+    //        cts.Token.Register(() =>
+    //        {
+    //            Console.WriteLine("工作线程被终止了。");
+    //        });
+    //        Thread t = new Thread(() =>
+    //        {
+    //            while (true)
+    //            {
+    //                if (cts.Token.IsCancellationRequested)
+    //                {
+    //                    Console.WriteLine("线程被终止！");
+    //                    break;
+    //                }
+    //                Console.WriteLine(DateTime.Now.ToString());
+    //                Thread.Sleep(1000);
+    //            }
+    //        });
+    //        t.Start();
+    //        Console.ReadLine();
+    //        cts.Cancel();
+    //    }
+    //}
+    #endregion
+
+    #region 78 应避免线程数量过多
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        for (int i = 0; i < 200; i++)
+    //        {
+    //            Thread t = new Thread(() =>
+    //            {
+    //                int j = 1;
+    //                while (true)
+    //                {
+    //                    j++;
+    //                }
+    //            })
+    //            {
+    //                IsBackground = true
+    //            };
+    //            t.Start();
+    //        }
+    //        Thread.Sleep(5000);
+    //        Thread t201 = new Thread(() =>
+    //        {
+    //            while (true)
+    //            {
+    //                Console.WriteLine("T201正在执行");
+    //            }
+    //        });
+    //        t201.Start();
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
     #endregion
 }
