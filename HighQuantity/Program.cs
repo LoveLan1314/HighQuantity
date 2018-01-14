@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -2807,6 +2809,414 @@ namespace HighQuantity
     //            }
     //        });
     //        t201.Start();
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
+    #region 79 使用ThreadPool或BackgroundWorker取代Thread
+    //class Program
+    //{
+    //    private BackgroundWorker worker;
+    //    private void StartAsyncButton_Click(object sender, EventArgs e)
+    //    {
+    //        worker.DoWork += new DoWorkEventHandler(Worker_DoWork);
+    //        worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
+    //        worker.RunWorkerAsync();
+    //    }
+
+    //    private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    private void Worker_DoWork(object sender, DoWorkEventArgs e)
+    //    {
+    //        BackgroundWorker worker = sender as BackgroundWorker;
+    //        for (int i = 0; i < 10; i++)
+    //        {
+    //            worker.ReportProgress(i);
+    //            Thread.Sleep(100);
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 80 用Task代替ThreadPool
+    //class Program
+    //{
+    //    //static void Main()
+    //    //{
+    //    //    Task t = new Task(() =>
+    //    //    {
+    //    //        Console.WriteLine("任务开始工作......");
+    //    //        //模拟工作过程
+    //    //        Thread.Sleep(5000);
+    //    //    });
+    //    //    t.Start();
+    //    //    t.ContinueWith((task) =>
+    //    //    {
+    //    //        Console.WriteLine("任务完成,完成时候的状态为：");
+    //    //        Console.WriteLine("IsCanceled={0}\tIsCompleted={1}\tIsFaulted={2}", task.IsCanceled, task.IsCompleted, task.IsFaulted);
+    //    //    });
+    //    //    Console.ReadKey();
+    //    //}
+    //    //static void Main()
+    //    //{
+    //    //    CancellationTokenSource cts = new CancellationTokenSource();
+    //    //    Task<int> t = new Task<int>(() => AddCancelByThrow(cts.Token), cts.Token);
+    //    //    t.Start();
+    //    //    t.ContinueWith(TaskEndedByCatch);
+    //    //    //等待按任意键取消任务
+    //    //    Console.ReadKey();
+    //    //    cts.Cancel();
+    //    //    Console.ReadKey();
+    //    //}
+    //    static void Main()
+    //    {
+    //        CancellationTokenSource cts = new CancellationTokenSource();//等待按任意键取消任务
+    //        TaskFactory taskFactory = new TaskFactory();
+    //        Task[] tasks = new Task[]
+    //        {
+    //            taskFactory.StartNew(() => Add(cts.Token)),
+    //            taskFactory.StartNew(() => Add(cts.Token)),
+    //            taskFactory.StartNew(() => Add(cts.Token))
+    //        };
+    //        //CancellationToken.None提示TasksEnded不能被取消
+    //        taskFactory.ContinueWhenAll(tasks,TaskEnded, CancellationToken.None);
+    //        Console.ReadKey();
+    //        cts.Cancel();
+    //        Console.ReadKey();
+    //    }
+
+    //    private static void TaskEnded(Task[] tasks)
+    //    {
+    //        Console.WriteLine("所有任务已完成！");
+    //    }
+
+    //    private static void TaskEndedByCatch(Task<int> task)
+    //    {
+    //        Console.WriteLine("任务完成，完成时候的状态为：");
+    //        Console.WriteLine("IsCanceled={0}\tIsCompleted={1}\tIsFaulted={2}", task.IsCanceled, task.IsCompleted, task.IsFaulted);
+    //        try
+    //        {
+    //            Console.WriteLine("任务的返回值为：{0}", task.Result);
+    //        }
+    //        catch (AggregateException e)
+    //        {
+    //            e.Handle((err) => err is OperationCanceledException);
+    //        }
+    //    }
+
+    //    private static int AddCancelByThrow(CancellationToken ct)
+    //    {
+    //        Console.WriteLine("任务开始......");
+    //        int result = 0;
+    //        while (true)
+    //        {
+    //            //ct.ThrowIfCancellationRequested();
+    //            if (result == 5)
+    //            {
+    //                throw new Exception("error");
+    //            }
+    //            result++;
+    //            Thread.Sleep(1000);
+    //        }
+    //        return result;
+    //    }
+
+    //    private static void TaskEnded(Task<int> task)
+    //    {
+    //        Console.WriteLine("任务完成，完成时候的状态为：");
+    //        Console.WriteLine("IsCanceled={0}\tIsCompleted={1}\tIsFaulted={2}", task.IsCanceled, task.IsCompleted, task.IsFaulted);
+    //        Console.WriteLine("任务的返回值为：{0}", task.Result);
+    //    }
+
+    //    private static int Add(CancellationToken ct)
+    //    {
+    //        Console.WriteLine("任务开始......");
+    //        int result = 0;
+    //        while (!ct.IsCancellationRequested)
+    //        {
+    //            result++;
+    //            Thread.Sleep(1000);
+    //        }
+    //        return result;
+    //    }
+    //}
+    #endregion
+
+    #region 81 使用Parallel简化同步状态下Task的使用
+    //class Program
+    //{
+    //    //static void Main()
+    //    //{
+    //    //    int[] nums = new int[] { 1, 2, 3, 4 };
+    //    //    Parallel.For(0, nums.Length, (i) =>
+    //    //      {
+    //    //          Console.WriteLine("针对数组索引{0}对应的那个元素{1}的一些工作代码", i, nums[i]);
+    //    //      });
+    //    //    Console.ReadKey();
+    //    //}
+    //    //static void Main()
+    //    //{
+    //    //    List<int> nums = new List<int> { 1, 2, 3, 4 };
+    //    //    Parallel.ForEach(nums, (item) =>
+    //    //    {
+    //    //        Console.WriteLine("针对集合元素{0}的一些工作代码......", item);
+    //    //    });
+    //    //    Console.ReadKey();
+    //    //}
+    //    static void Main()
+    //    {
+    //        Parallel.Invoke(() =>
+    //        {
+    //            Console.WriteLine("任务1......");
+    //        },
+    //        () =>
+    //        {
+    //            Console.WriteLine("任务2......");
+    //        },
+    //        () =>
+    //        {
+    //            Console.WriteLine("任务3......");
+    //        });
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
+    #region 82 Paraller简化但不等同于Task默认行为
+    //class Program
+    //{
+    //    //static void Main()
+    //    //{
+    //    //    Task t = new Task(() =>
+    //    //    {
+    //    //        while (true)
+    //    //        {
+
+    //    //        }
+    //    //    });
+    //    //    t.Start();
+    //    //    Console.WriteLine("主线程即将结束");
+    //    //    Console.ReadKey();
+    //    //}
+    //    static void Main()
+    //    {
+    //        //在这里也可以使用Invoke方法
+    //        Parallel.For(0, 1, (i) =>
+    //        {
+    //            while (true)
+    //            {
+
+    //            }
+    //        });
+    //        Console.WriteLine("主线程即将结束");
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
+    #region 83 小心Parallel中的陷阱
+    //class Program
+    //{
+    //    //static void Main()
+    //    //{
+    //    //    int[] nums = new int[] { 1, 2, 3, 4 };
+    //    //    int total = 0;
+    //    //    Parallel.For(0, nums.Length, () =>
+    //    //    {
+    //    //        return 1;
+    //    //    }, (i, loopState, subtotal) =>
+    //    //    {
+    //    //        subtotal += nums[i];
+    //    //        return subtotal;
+    //    //    }, (x) => Interlocked.Add(ref total, x));
+    //    //    Console.WriteLine("total={0}", total);
+    //    //    Console.ReadKey();
+    //    //}
+    //    static void Main()
+    //    {
+    //        string[] stringArr = new string[] { "aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh" };
+    //        string result = string.Empty;
+    //        Parallel.For(0, stringArr.Length, () => "-", (i, loopState, subResult) =>
+    //           {
+    //               return subResult += stringArr[i];
+    //           }, (threadEndString) =>
+    //           {
+    //               result += threadEndString;
+    //               Console.WriteLine("Inner：" + threadEndString);
+    //           });
+    //        Console.WriteLine(result);
+    //        Console.ReadKey();
+    //    }
+    //}
+    #endregion
+
+    #region 84 使用PLINQ
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        List<int> intList = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    //        var query = from p in intList select p;
+    //        Console.WriteLine("以下是LINQ顺序输出：");
+    //        foreach (int item in query)
+    //        {
+    //            Console.WriteLine(item.ToString());
+    //        }
+    //        Console.WriteLine("以下是PLINQ并行输出：");
+    //        var queryParallel = from p in intList.AsParallel() select p;
+    //        foreach (int item in queryParallel)
+    //        {
+    //            Console.WriteLine(item.ToString());
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 85 Task中的异常处理
+    //class Program
+    //{
+    //    //static void Main()
+    //    //{
+    //    //    Task t = new Task(() =>
+    //    //    {
+    //    //        throw new Exception("任务并行编码中产生的未知异常");
+    //    //    });
+    //    //    t.Start();
+    //    //    try
+    //    //    {
+    //    //        //若有Result，可求Result
+    //    //        t.Wait();
+    //    //    }
+    //    //    catch(AggregateException ex)
+    //    //    {
+    //    //        foreach (var item in ex.InnerExceptions)
+    //    //        {
+    //    //            Console.WriteLine("异常类型：{0}{1}来自：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine, item.Source,
+    //    //                Environment.NewLine, item.Message);
+    //    //        }
+    //    //    }
+    //    //    Console.WriteLine("主线程马上结束");
+    //    //    Console.ReadKey();
+    //    //}
+    //    //static void Main()
+    //    //{
+    //    //    Task t = new Task(() =>
+    //    //    {
+    //    //        throw new Exception("任务并行编码中产生的未知异常");
+    //    //    });
+    //    //    t.Start();
+    //    //    Task tEnd = t.ContinueWith((task) =>
+    //    //    {
+    //    //        foreach (Exception item in task.Exception.InnerExceptions)
+    //    //        {
+    //    //            Console.WriteLine("异常类型：{0}{1}来自：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine, item.Source,
+    //    //                Environment.NewLine, item.Message);
+    //    //        }
+    //    //    },TaskContinuationOptions.OnlyOnFaulted);
+    //    //    Console.WriteLine("主线程马上结束");
+    //    //    Console.ReadKey();
+    //    //}
+    //    //static void Main()
+    //    //{
+    //    //    Task t = new Task(() =>
+    //    //    {
+    //    //        throw new InvalidOperationException("任务并行编码中产生的未知异常");
+    //    //    });
+    //    //    t.Start();
+    //    //    Task tEnd = t.ContinueWith((task) =>
+    //    //    {
+    //    //        throw task.Exception;
+    //    //    }, TaskContinuationOptions.OnlyOnFaulted);
+    //    //    try
+    //    //    {
+    //    //        tEnd.Wait();
+    //    //    }
+    //    //    catch (AggregateException ex)
+    //    //    {
+    //    //        foreach (var item in ex.InnerExceptions)
+    //    //        {
+    //    //            Console.WriteLine("异常类型：{0}{1}来自：{2}{3}异常内容：{4}", item.InnerException.GetType(), Environment.NewLine,
+    //    //                item.InnerException.Source, Environment.NewLine, item.InnerException.Message);
+    //    //        }
+    //    //    }
+    //    //    Console.WriteLine("主线程马上结束");
+    //    //    Console.ReadKey();
+    //    //}
+    //    static event EventHandler<AggregateExceptionArgs> AggregateExceptionCatched;
+    //    public class AggregateExceptionArgs : EventArgs
+    //    {
+    //        public AggregateException AggregateException { get; set; }
+    //    }
+    //    static void Main()
+    //    {
+    //        AggregateExceptionCatched += new EventHandler<AggregateExceptionArgs>(Program_AggregateExceptionCatched);
+    //        Task t = new Task(() =>
+    //        {
+    //            try
+    //            {
+    //                throw new InvalidOperationException("任务并行编码中产生的未知异常");
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                AggregateExceptionArgs errArgs = new AggregateExceptionArgs()
+    //                {
+    //                    AggregateException = new AggregateException(ex)
+    //                };
+    //                AggregateExceptionCatched(null, errArgs);
+    //            }
+    //        });
+    //        t.Start();
+    //        Console.WriteLine("主线程马上结束");
+    //        Console.ReadKey();
+    //    }
+    //    static void Program_AggregateExceptionCatched(object sender, AggregateExceptionArgs e)
+    //    {
+    //        foreach (var item in e.AggregateException.InnerExceptions)
+    //        {
+    //            Console.WriteLine("异常类型：{0}{1}来自：{2}{3}异常内容：{4}", item.GetType(), Environment.NewLine,
+    //                item.Source, Environment.NewLine, item.Message);
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 86 Parallel中的异常处理
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        try
+    //        {
+    //            var parallelExceptions = new ConcurrentQueue<Exception>();
+    //            Parallel.For(0, 1, (i) =>
+    //            {
+    //                try
+    //                {
+    //                    throw new InvalidOperationException("并行任务中出现的异常");
+    //                }
+    //                catch (Exception ex)
+    //                {
+    //                    parallelExceptions.Enqueue(ex);
+    //                }
+    //                if (parallelExceptions.Count > 0)
+    //                {
+    //                    throw new AggregateException(parallelExceptions);
+    //                }
+    //            });
+    //        }
+    //        catch (AggregateException ex)
+    //        {
+    //            foreach (Exception item in ex.InnerExceptions)
+    //            {
+    //                Console.WriteLine("异常类型：{0}{1}来自：{2}{3}异常内容：{4}", item.InnerException.GetType(), Environment.NewLine,
+    //                    item.InnerException.Source, Environment.NewLine, item.InnerException.Message);
+    //            }
+    //        }
+    //        Console.WriteLine("主线程马上结束");
     //        Console.ReadKey();
     //    }
     //}
