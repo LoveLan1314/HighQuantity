@@ -3299,4 +3299,54 @@ namespace HighQuantity
     #endregion
 
     #endregion
+
+    #region SeventhChapter 成员设计
+
+    #region 90 不要为抽象类提供公开的构造方法
+    //abstract class MyAbstractClass
+    //{
+    //    protected MyAbstractClass() { }
+    //}
+    #endregion
+
+    #region 91 可见字段应该重构为属性
+    //class Person
+    //{
+    //    public string Name { get; set; }
+    //}
+    #endregion
+
+    #region 92 谨慎将数组或集合作为属性
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Company microsoft = new Company();
+    //        microsoft.Employees[0].Name = "Luminji";
+    //        foreach (var item in microsoft.Employees)
+    //        {
+    //            Console.WriteLine(item.Name);
+    //        }
+    //        Console.ReadKey();
+    //    }
+    //}
+
+    //internal class Company
+    //{
+    //    public Company()
+    //    {
+    //        Employees = new List<Employee>()
+    //        {
+    //            new Employee(){Name = "Bill Gates"}
+    //        };
+    //    }
+    //    public IList<Employee> Employees { get; private set; }
+    //}
+    //internal class Employee
+    //{
+    //    public string Name { get; internal set; }
+    //}
+    #endregion
+
+    #endregion
 }
