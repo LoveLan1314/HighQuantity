@@ -3222,5 +3222,81 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 87 区分WPF和WinForm中的线程模型
+
+    #endregion
+
+    #region 88 并行并不总是速度更快
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Stopwatch watch = new Stopwatch();
+    //        watch.Start();
+    //        DoInFor();
+    //        watch.Stop();
+    //        Console.WriteLine("同步耗时：{0}", watch.Elapsed);
+    //        watch.Restart();
+    //        DoInParallerFor();
+    //        watch.Stop();
+    //        Console.WriteLine("并行耗时：{0}", watch.Elapsed);
+    //        Console.ReadKey();
+    //    }
+
+    //    static void DoSomething()
+    //    {
+    //        for (int i = 0; i < 10; i++)
+    //        {
+    //            i++;
+    //        }
+    //    }
+
+    //    private static void DoInParallerFor()
+    //    {
+    //        for (int i = 0; i < 200; i++)
+    //        {
+    //            DoSomething();
+    //        }
+    //    }
+
+    //    private static void DoInFor()
+    //    {
+    //        Parallel.For(0, 200, (i) =>
+    //         {
+    //             DoSomething();
+    //         });
+    //    }
+    //}
+    #endregion
+
+    #region 89 在并行方法体中谨慎使用锁
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        SampleCalss sample = new SampleCalss();
+    //        object syncObj = new object();
+    //        Parallel.For(0, 10000000, (i) =>
+    //          {
+    //              lock (syncObj)
+    //              {
+    //                  sample.SimpleAdd();
+    //              }
+    //          });
+    //        Console.WriteLine(sample.SomeCount);
+    //    }
+    //}
+
+    //internal class SampleCalss
+    //{
+    //    public long SomeCount { get; private set; }
+
+    //    internal void SimpleAdd()
+    //    {
+    //        SomeCount++;
+    //    }
+    //}
+    #endregion
+
     #endregion
 }
