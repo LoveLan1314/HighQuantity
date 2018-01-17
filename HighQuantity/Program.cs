@@ -3348,5 +3348,154 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 93 构造方法应初始化主要属性和字段
+    //class Company
+    //{
+    //    Employee specialA = new Employee() { Name = "Mike" };
+    //    Employee specialB;
+    //    public Employee CEO { get; set; }
+    //    public Company()
+    //    {
+    //        CEO = new Employee() { Name = "Steve" };
+    //        specialB = new Employee() { Name = "Rose" };
+    //    }
+    //}
+
+    //internal class Employee
+    //{
+    //    public string Name { get; internal set; }
+    //}
+    #endregion
+
+    #region 94 区别对待override和new
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        //Shape s = new Circle();
+    //        //s.MethodVirtual();
+    //        //s.Method();
+    //        //Circle circle = new Circle();
+    //        //circle.MethodVirtual();
+    //        //circle.Method();
+    //        //Shape s = new Triangle();
+    //        //s.MethodVirtual();
+    //        //s.Method();
+    //        //Triangle triangle = new Triangle();
+    //        //triangle.MethodVirtual();
+    //        //triangle.Method();
+    //        //Shape s = new Diamond();
+    //        //s.MethodVirtual();
+    //        //s.Method();
+    //        //Diamond diamond = new Diamond();
+    //        //diamond.MethodVirtual();
+    //        //diamond.Method();
+    //        TestShape();
+    //        TestDerive();
+    //        TestDerive2();
+    //    }
+
+    //    private static void TestDerive2()
+    //    {
+    //        Console.WriteLine("TestDerive2\tStart");
+    //        Circle circle = new Circle();
+    //        PrintShape(circle);
+    //        Rectangle rectangle = new Rectangle();
+    //        PrintShape(rectangle);
+    //        Triangle triangle = new Triangle();
+    //        PrintShape(triangle);
+    //        Diamond diamond = new Diamond();
+    //        PrintShape(diamond);
+    //        Console.WriteLine("TestDerive2\tEnd\n");
+    //    }
+
+    //    private static void PrintShape(Shape shape)
+    //    {
+    //        shape.MethodVirtual();
+    //        shape.Method();
+    //    }
+
+    //    private static void TestDerive()
+    //    {
+    //        Console.WriteLine("TestDerive\tStart");
+    //        Circle circle = new Circle();
+    //        Rectangle rectangle = new Rectangle();
+    //        Triangle triangle = new Triangle();
+    //        Diamond diamond = new Diamond();
+    //        circle.MethodVirtual();
+    //        circle.Method();
+    //        rectangle.MethodVirtual();
+    //        rectangle.Method();
+    //        triangle.MethodVirtual();
+    //        triangle.Method();
+    //        diamond.MethodVirtual();
+    //        diamond.Method();
+    //        Console.WriteLine("TestShape\tEnd\n");
+    //    }
+
+    //    private static void TestShape()
+    //    {
+    //        Console.WriteLine("TestShape\tStart");
+    //        List<Shape> shapes = new List<Shape>
+    //        {
+    //            new Circle(),
+    //            new Rectangle(),
+    //            new Triangle(),
+    //            new Diamond()
+    //        };
+    //        foreach (Shape s in shapes)
+    //        {
+    //            s.MethodVirtual();
+    //            s.Method();
+    //        }
+    //        Console.WriteLine("TestShape\tEnd\n");
+    //    }
+    //}
+    //public class Shape
+    //{
+    //    public virtual void MethodVirtual()
+    //    {
+    //        Console.WriteLine("base MethodVitual call");
+    //    }
+    //    public void Method()
+    //    {
+    //        Console.WriteLine("base Method call");
+    //    }
+    //}
+    //class Circle : Shape
+    //{
+    //    public override void MethodVirtual()
+    //    {
+    //        Console.WriteLine("circle override MethodVirtual");
+    //    }
+    //}
+    //class Rectangle : Shape
+    //{
+
+    //}
+    //class Triangle : Shape
+    //{
+    //    public new void MethodVirtual()
+    //    {
+    //        Console.WriteLine("triangle new MethodVirtual");
+    //    }
+    //    public new void Method()
+    //    {
+    //        Console.WriteLine("triangle new Method");
+    //    }
+    //}
+    //class Diamond : Shape
+    //{
+    //    public void MethodVirtual()
+    //    {
+    //        Console.WriteLine("Diamond default MethodVirtual");
+    //    }
+    //    public void Method()
+    //    {
+    //        Console.WriteLine("Diamond default Method");
+    //    }
+    //}
+    #endregion
+
     #endregion
 }
