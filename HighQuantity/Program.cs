@@ -3497,5 +3497,93 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 95 避免在构造方法中调用虚成员
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        American american = new American();
+    //        Console.ReadKey();
+    //    }
+    //}
+    //class Person
+    //{
+    //    public Person()
+    //    {
+    //        InitSkin();
+    //    }
+    //    protected virtual void InitSkin()
+    //    {
+    //        //省略
+    //    }
+    //}
+    //class American : Person
+    //{
+    //    Race race;
+    //    public American() : base()
+    //    {
+    //        race = new Race() { Name = "White" };
+    //    }
+    //    protected override void InitSkin()
+    //    {
+    //        Console.WriteLine(race.Name);
+    //    }
+    //}
+
+    //internal class Race
+    //{
+    //    public string Name { get; internal set; }
+    //}
+    #endregion
+
+    #region 96 成员应优先考虑公开基类型或接口
+
+    #endregion
+
+    #region 97 优先考虑将基类型或接口作为参数传递
+
+    #endregion
+
+    #region 98 用params减少重复参数
+
+    #endregion
+
+    #region 99 重写时不应使用子类参数
+
+    #endregion
+
+    #region 100 静态方法和实例方法没有区别
+
+    #endregion
+
+    #region 101 使用扩展方法，向现有类型“添加”方法
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        Student student = new Student();
+    //        //Console.WriteLine(StudentConverter.GetSexString(student));
+    //        Console.WriteLine(student.GetSexString());
+    //    }
+    //}
+    //public static class StudentConverter
+    //{
+    //    public static string GetSexString(Student student) => student.GetSex() ? "男D" : "女?";
+    //}
+
+    //public class Student
+    //{
+    //    internal bool GetSex()
+    //    {
+    //        return false;
+    //    }
+    //}
+
+    //public static class StudentExtension
+    //{
+    //    public static string GetSexString(this Student student) => student.GetSex() ? "男" : "女";
+    //}
+    #endregion
+
     #endregion
 }
