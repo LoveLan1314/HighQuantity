@@ -3586,4 +3586,226 @@ namespace HighQuantity
     #endregion
 
     #endregion
+
+    #region EigthChapter 类型设计
+
+    #region 102 区分接口和抽象类的应用场合
+    //public abstract class Stream : MarshalByRefObject, IDisposable
+    //{
+    //    //其他省略
+    //    public virtual int ReadByte()
+    //    {
+    //        byte[] buffer = new byte[1];
+    //        if(this.Read(buffer,0,1) == 1)
+    //        {
+    //            return -1;
+    //        }
+    //        return buffer[0];
+    //    }
+
+    //    private int Read(byte[] buffer, int v1, int v2)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    //其他省略
+    //    public void Dispose()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
+    #endregion
+
+    #region 103 区分组合和继承的应用场所
+    //abstract class Stream
+    //{
+    //    //省略
+    //}
+    //class FileStream : Stream
+    //{
+    //    //省略
+    //}
+    //class MemoryStream : Stream
+    //{
+    //    //省略
+    //}
+    //class Context
+    //{
+    //    //省略
+    //}
+    //class CultureInfo
+    //{
+    //    //省略
+    //    public void OtherMethod()
+    //    {
+
+    //    }
+    //}
+    //class Thread
+    //{
+    //    private Context context;
+    //    private CultureInfo cultureInfo;
+    //    //省略
+    //    public void OtherMethod()
+    //    {
+    //        cultureInfo.OtherMethod();
+    //    }
+    //}
+    #endregion
+
+    #region 104 用多态代替条件语句
+    //class Program
+    //{
+    //    enum DriveCommand
+    //    {
+    //        Start,
+    //        Stop,
+    //        Pause,
+    //        TurnLeft,
+    //        TurnRight,
+    //    }
+    //    static void Main(string[] args)
+    //    {
+    //        //DriveCommand command = DriveCommand.Start;
+    //        //Drive(command);
+    //        //command = DriveCommand.Stop;
+    //        //Drive(command);
+    //        Commander commander = new StartCommander();
+    //        Drive(commander);
+    //        commander = new StopCommander();
+    //        Drive(commander);
+    //    }
+    //    static void Drive(Commander commander)
+    //    {
+    //        commander.Execute();
+    //    }
+    //    //static void Drive(DriveCommand command)
+    //    //{
+    //    //    if(command == DriveCommand.Start)
+    //    //    {
+    //    //        //车辆启动
+    //    //    }
+    //    //    else if(command == DriveCommand.Stop)
+    //    //    {
+    //    //        //车辆停止
+    //    //    }
+    //    //}
+    //    static void Drive(DriveCommand command)
+    //    {
+    //        switch (command)
+    //        {
+    //            case DriveCommand.Start:
+    //                //车辆启动
+    //                break;
+    //            case DriveCommand.Stop:
+    //                //车辆停止
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
+    //abstract class Commander
+    //{
+    //    public abstract void Execute();
+    //}
+    //class StartCommander : Commander
+    //{
+    //    public override void Execute()
+    //    {
+    //        //启动
+    //    }
+    //}
+    //class StopCommander : Commander
+    //{
+    //    public override void Execute()
+    //    {
+    //        //停止
+    //    }
+    //}
+    #endregion
+
+    #region 105 使用私有构造函数强化单例
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Singleton.Instance.SampleMethod();
+    //    }
+    //}
+    //public sealed class Singleton
+    //{
+    //    static Singleton instance = null;
+    //    static readonly object padlock = new object();
+    //    //限制实例在外部被创建
+    //    private Singleton()
+    //    {
+
+    //    }
+
+    //    public static Singleton Instance
+    //    {
+    //        get
+    //        {
+    //            if(instance == null)
+    //            {
+    //                lock (padlock)
+    //                {
+    //                    if(instance == null)
+    //                    {
+    //                        instance = new Singleton();
+    //                    }
+    //                }
+    //            }
+    //            return instance;
+    //        }
+    //    }
+
+    //    public void SampleMethod()
+    //    {
+    //        //省略
+    //    }
+    //}
+    #endregion
+
+    #region 106 为静态类添加静态构造函数
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        SampleClass.SampleMethod();
+    //        Console.ReadKey();
+    //    }
+    //}
+    //static class SampleClass
+    //{
+    //    static FileStream fileStream;
+    //    static SampleClass()
+    //    {
+    //        try
+    //        {
+    //            fileStream = File.Open(@"c:\temp.txt", FileMode.Open);
+    //        }
+    //        catch (FileNotFoundException err)
+    //        {
+    //            Console.WriteLine(err.Message);
+    //            //处理异常
+    //        }
+    //    }
+    //    public static void SampleMethod()
+    //    {
+
+    //    }
+    //}
+    #endregion
+
+    #region 107 区分静态类和单例
+
+    #endregion
+
+    #region 108 将类型标识为sealed
+
+    #endregion
+
+    #endregion
 }
