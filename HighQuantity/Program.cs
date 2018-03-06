@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -3804,6 +3805,194 @@ namespace HighQuantity
     #endregion
 
     #region 108 将类型标识为sealed
+
+    #endregion
+
+    #region 109 谨慎使用嵌套类
+    //public class ArrayList : IList, ICollection, IEnumerable, ICloneable
+    //{
+    //    public object this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    //    public bool IsReadOnly => throw new NotImplementedException();
+
+    //    public bool IsFixedSize => throw new NotImplementedException();
+
+    //    public int Count => throw new NotImplementedException();
+
+    //    public object SyncRoot => throw new NotImplementedException();
+
+    //    public bool IsSynchronized => throw new NotImplementedException();
+
+    //    public int Add(object value)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Clear()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public object Clone()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public bool Contains(object value)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void CopyTo(Array array, int index)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public IEnumerator GetEnumerator()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public int IndexOf(object value)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Insert(int index, object value)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Remove(object value)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void RemoveAt(int index)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //    [Serializable]
+    //    private sealed class ArrayListEnumeratorSimple : IEnumerable, ICloneable
+    //    {
+    //        public object Clone()
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+
+    //        public IEnumerator GetEnumerator()
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+
+    //        internal ArrayListEnumeratorSimple(ArrayList list)
+    //        {
+
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 110 用类来代替enum
+    //enum Week
+    //{
+    //    Monday,
+    //    Tuesday,
+    //    Wednesday,
+    //    Thursday,
+    //    Friday,
+    //    Saturday,
+    //    Sunday
+    //}
+    //class Week
+    //{
+    //    public static readonly Week Monday = new Week(0);
+    //    public static readonly Week Tuesday = new Week(1);
+    //    private int infoType;
+    //    private Week(int infoType)
+    //    {
+    //        this.infoType = infoType;
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Console.WriteLine(EnumHelper.GetDescription(Week.Monday));
+    //    }
+    //}
+    //enum Week
+    //{
+    //    [EnumDescription("星期一")]
+    //    Monday,
+    //    [EnumDescription("星期二")]
+    //    Tuesday
+    //}
+    //[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    //public sealed class EnumDescriptionAttribute : Attribute
+    //{
+    //    private string description;
+    //    public string Description => description;
+    //    public EnumDescriptionAttribute(string description) : base()
+    //    {
+    //        this.description = description;
+    //    }
+    //}
+    //public static class EnumHelper
+    //{
+    //    public static string GetDescription(Enum value)
+    //    {
+    //        if (value == null)
+    //        {
+    //            throw new ArgumentNullException("value");
+    //        }
+    //        string description = value.ToString();
+    //        FieldInfo fieldInfo = value.GetType().GetField(description);
+    //        EnumDescriptionAttribute[] attributes = (EnumDescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(EnumDescriptionAttribute), false);
+    //        if (attributes != null && attributes.Length > 0)
+    //        {
+    //            description = attributes[0].Description;
+    //        }
+    //        return description;
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+
+    //    }
+    //}
+
+    //class Week
+    //{
+    //    public static readonly Week Monday = new Week(0);
+    //    public static readonly Week Tuesday = new Week(1);
+    //    private int infoType;
+    //    private Week(int infoType)
+    //    {
+    //        this.infoType = infoType;
+    //    }
+    //    public override string ToString()
+    //    {
+    //        switch (infoType)
+    //        {
+    //            case 0:
+    //                return "星期一";
+    //            case 1:
+    //                return "星期二";
+    //            default:
+    //                throw new Exception("不正确的星期信息！");
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 111 避免双向耦合
+
+    #endregion
+
+    #region 112 将现实世界中的对象抽象为类，将可复用对象圈起来就是命名空间
 
     #endregion
 
