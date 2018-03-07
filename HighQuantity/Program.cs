@@ -12,7 +12,10 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security;
 using System.Security.Cryptography;
+using System.Security.Permissions;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -4090,6 +4093,158 @@ namespace HighQuantity
     //            {
     //                return BitConverter.ToString(md5.ComputeHash(fs)).Replace("-", "");
     //            }
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 116 避免用非对称算法加密文件
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        EncryptFile(@"c:\temp.txt", @"c:\temp.txt", "123");
+    //        Console.WriteLine("加密成功！");
+    //        DecryptFile(@"c:\temp.txt", @"c:\temp.txt", "123");
+    //        Console.WriteLine("解密成功！");
+    //    }
+    //    //缓冲区大小
+    //    static int bufferSize = 128 * 1024;
+    //    //密钥salt
+    //    static byte[] salt = { 134, 216, 88, 164, 91, 227, 174, 76, 191, 197, 192, 154, 200, 248 };
+    //    //初始化向量
+    //    static byte[] iv = { 134, 216, 88, 164, 91, 227, 174, 76, 191, 197, 192, 154, 200, 248 };
+    //    //初始化并返回对称加密算法
+    //    static SymmetricAlgorithm CreateRijndael(string password,byte[] salt)
+    //    {
+    //        PasswordDeriveBytes pdb = new PasswordDeriveBytes(password, salt,"SHA256",1000);
+    //        SymmetricAlgorithm sma = Rijndael.Create();
+    //        sma.KeySize = 256;
+    //        sma.Key = pdb.GetBytes(32);
+    //        sma.Padding = PaddingMode.PKCS7;
+    //        return sma;
+    //    }
+    //    static void EncryptFile(string inFile,string outFile,string password)
+    //    {
+    //        using (FileStream inFileStream = File.OpenRead(inFile),outFileStream = File.Open(outFile,FileMode.OpenOrCreate))
+    //        {
+    //            using (SymmetricAlgorithm algorithm = CreateRijndael(password,salt))
+    //            {
+    //                algorithm.IV = iv;
+    //                using (CryptoStream cryptoStream = new CryptoStream(outFileStream,algorithm.CreateEncryptor(),CryptoStreamMode.Write))
+    //                {
+    //                    byte[] bytes = new byte[bufferSize];
+    //                    int readSize = -1;
+    //                    while ((readSize = inFileStream.Read(bytes,0,bytes.Length)) != 0)
+    //                    {
+    //                        cryptoStream.Write(bytes, 0, readSize);
+    //                    }
+    //                    cryptoStream.Flush();
+    //                }
+    //            }
+    //        }
+    //    }
+    //    static void DecryptFile(string inFile,string outFile,string password)
+    //    {
+    //        using (FileStream inFileStream = File.OpenRead(inFile), outFileStream = File.OpenWrite(outFile))
+    //        {
+    //            using (SymmetricAlgorithm algorithm = CreateRijndael(password,salt))
+    //            {
+    //                algorithm.IV = iv;
+    //                using (CryptoStream cryptoStream = new CryptoStream(inFileStream,algorithm.CreateDecryptor(),CryptoStreamMode.Read))
+    //                {
+    //                    byte[] bytes = new byte[bufferSize];
+    //                    int readSize = -1;
+    //                    int numReads = (int)(inFileStream.Length / bufferSize);
+    //                    int slack = (int)(inFileStream.Length % bufferSize);
+    //                    for (int i = 0; i < numReads; ++i)
+    //                    {
+    //                        readSize = cryptoStream.Read(bytes, 0, bytes.Length);
+    //                        outFileStream.Write(bytes, 0, readSize);
+    //                    }
+    //                    if(slack > 0)
+    //                    {
+    //                        readSize = cryptoStream.Read(bytes, 0, (int)slack);
+    //                        outFileStream.Write(bytes, 0, readSize);
+    //                    }
+    //                    outFileStream.Flush();
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 117 使用SSL确保通信中的数据安全
+
+    #endregion
+
+    #region 118 使用SecureString保存密钥等机密字符串
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Method1();
+    //        Console.ReadKey();
+    //    }
+    //    static void Method1()
+    //    {
+    //        string str = "luminji";
+    //        Console.WriteLine(str);
+    //    }
+    //}
+    #endregion
+
+    #region 119 不要使用自己的加密算法
+
+    #endregion
+
+    #region 120 为程序集指定强名称
+
+    #endregion
+
+    #region 121 为应用程序设定运行权限
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
+    //        SampleClass sample = new SampleClass();
+    //        Console.WriteLine("代码成功运行...");
+    //    }
+    //    [PrincipalPermission(SecurityAction.Demand,Role = @"Administrator")]
+    //    class SampleClass
+    //    {
+
+    //    }
+    //}
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        GenericIdentity examldentity = new GenericIdentity("ExamUser");
+    //        //string[] users = { "Teacher", "Student" };
+    //        string[] users = { "Student" };
+    //        GenericPrincipal myPrincipal = new GenericPrincipal(examldentity, users);
+    //        Thread.CurrentPrincipal = myPrincipal;
+    //        ScoreProcessor score = new ScoreProcessor();
+    //        score.Update();
+    //    }
+    //}
+    //class ScoreProcessor
+    //{
+    //    public void Update()
+    //    {
+    //        try
+    //        {
+    //            PrincipalPermission myPermission = new PrincipalPermission("ExamUser", "Teacher");
+    //            myPermission.Demand();
+    //            //省略
+    //            Console.WriteLine("修改成绩成功");
+    //        }
+    //        catch (SecurityException ex)
+    //        {
+    //            Console.WriteLine(ex.Message);
     //        }
     //    }
     //}
