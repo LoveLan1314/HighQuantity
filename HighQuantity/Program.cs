@@ -4251,4 +4251,48 @@ namespace HighQuantity
     #endregion
 
     #endregion
+
+    #region TenthChapter 命名规范
+
+    #region 122 以<Company>.<Component>为命名空间命名
+
+    #endregion
+
+    #region 123 程序集不必与命名空间同名
+
+    #endregion
+
+    #region 124 考虑在命名空间中使用复数
+
+    #endregion
+
+    #region 125 避免用FCL的类型名称命名自己的类型
+
+    #endregion
+
+    #region 126 用名词和名词组给类型命名
+
+    #endregion
+
+    #region 127 用形容词组给接口命名
+    //class SampleClass : IDisposable, IEnumerable<SampleClass>
+    //{
+    //    public void Dispose()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public IEnumerator<SampleClass> GetEnumerator()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    IEnumerator IEnumerable.GetEnumerator()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
+    #endregion
+
+    #endregion
 }
