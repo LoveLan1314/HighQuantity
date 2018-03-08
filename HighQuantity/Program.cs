@@ -4426,4 +4426,36 @@ namespace HighQuantity
     #endregion
 
     #endregion
+
+    #region EleventhChapter 代码整洁
+
+    #region 140 使用默认的访问修饰符
+
+    #endregion
+
+    #region 141 不知道该不该用大括号时，就用
+
+    #endregion
+
+    #region 142 总是提供有意义的命名
+
+    #endregion
+
+    #region 143 方法抽象级别应在同一层次
+
+    #endregion
+
+    #region 144 一个方法只做一件事
+
+    #endregion
+
+    #region 145 避免过长的方法和过长的类
+
+    #endregion
+
+    #region 146 只对外公布必要的操作
+
+    #endregion
+
+    #endregion
 }
