@@ -4294,5 +4294,136 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 128 考虑让派生类的名字以基类名字作为后缀
+    // [System.Serializable]
+    // public class MyException : System.Exception
+    // {
+    //     public MyException() { }
+    //     public MyException(string message) : base(message) { }
+    //     public MyException(string message, System.Exception inner) : base(message, inner) { }
+    //     protected MyException(
+    //         System.Runtime.Serialization.SerializationInfo info,
+    //         System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    // }
+    #endregion
+
+    #region 129 泛型类型参数要以T作为前缀
+    //class Program
+    //{
+    //    static void Main()
+    //    {
+    //        SampleClass<string> sampleClass = new SampleClass<string>();
+    //        sampleClass.SampleMethod("123");
+    //        sampleClass.SampleMethod2<string>("123");
+    //    }
+    //}
+    //class SampleClass<T>
+    //{
+    //    public void SampleMethod(T t){
+
+    //    }
+    //    public void SampleMethod2<T1>(T1 t){
+
+    //    }
+    //}
+    #endregion
+
+    #region 130 以复数命名枚举类型，以单数命名枚举元素
+    //enum Week
+    //{
+    //    Monday,
+    //    Tuesday,
+    //    Wednesday,
+    //    Thursday,
+    //    Friday,
+    //    Staturday,
+    //    Sunday
+    //}
+    #endregion
+
+    #region 131 用PascalCasing命名公开元素
+    //class Person
+    //{
+    //    public string FirstName;
+    //    public string LastName;
+    //    public string Name => string.Format("{0} {1}", FirstName, LastName);
+    //    public string GetName() => Name;
+    //}
+    #endregion
+
+    #region 132 考虑用类名作为属性名
+    //class Person
+    //{
+    //    public Company Company { get; set; } 
+    //}
+    //class Company
+    //{
+    //    //省略
+    //}
+    #endregion
+
+    #region 133 用camelCasing命名私有字段和局部变量
+    //class Person
+    //{
+    //    private string firstName;
+    //    private string lastName;
+    //    public string Name => string.Format("{0} {1}", firstName, lastName);
+    //    private int DoSomething(int a, int b)
+    //    {
+    //        int iTemp = 10;
+    //        return a + b + iTemp;
+    //    }
+    //}
+    #endregion
+
+    #region 134 有条件地使用前缀
+    //class SampleClass
+    //{
+    //    static int s_price;
+    //    int m_price;
+    //    const int BASED_PRICE = 1000;
+    //    public static void SetStaticField(int price) => s_price = price;
+    //    public void SetClassField(int price) => m_price = price;
+    //}
+    //class SampleClass2
+    //{
+    //    int _price;
+    //    public void SetPrice(int price) => _price = price;
+    //}
+    #endregion
+
+    #region 135 考虑使用肯定性的短语命名布尔属性
+    //class SampleClass
+    //{
+    //    public bool IsEnabled { get; set; }
+    //    public bool IsTabStop { get; set; }
+    //    public bool AllowDrop { get; set; }
+    //    public bool IsActive { get; }
+    //    public bool IsChecked { get; set; }
+    //}
+    #endregion
+
+    #region 136 优先使用后缀表示已有类型的新版本
+
+    #endregion
+
+    #region 137 委托和事件类型应添加上级后缀
+    //class SampleClass
+    //{
+    //    public delegate void HttpContinueDelegate(int statusCode, WebHeaderCollection httpHeaders);
+    //    public delegate void ValidateValueCallback(object value);
+    //    public delegate void AsyncCallback(IAsyncResult ar);
+    //    //public delegate void PropertyChangeCallback(DependencyObject d,DependencyPropertyChangedEventArgs e);
+    //}
+    #endregion
+
+    #region 138 事件和委托变量使用动词或形容词短语命名
+
+    #endregion
+
+    #region 139 事件处理器命名采用组合方式
+
+    #endregion
+
     #endregion
 }
