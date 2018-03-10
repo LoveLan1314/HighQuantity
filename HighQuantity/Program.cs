@@ -4457,5 +4457,113 @@ namespace HighQuantity
 
     #endregion
 
+    #region 147 重构多个相关属性为一个类
+
+    #endregion
+
+    #region 148 不重复代码
+
+    #endregion
+
+    #region 149 使用表驱动法避免过长的if和switch分支
+    //class Program
+    //{
+    //    //static void Main(string[] args)
+    //    //{
+    //    //    Console.WriteLine(GetChineseWeekInTable(Week.Friday));
+    //    //}
+    //    //static string GetChineseWeek(Week week)
+    //    //{
+    //    //    switch (week)
+    //    //    {
+    //    //        case Week.Monday:
+    //    //            return "星期一";
+    //    //        case Week.Tuesday:
+    //    //            return "星期二";
+    //    //        case Week.Wednesday:
+    //    //            return "星期三";
+    //    //        case Week.Thursday:
+    //    //            return "星期四";
+    //    //        case Week.Friday:
+    //    //            return "星期五";
+    //    //        case Week.Staturday:
+    //    //            return "星期六";
+    //    //        case Week.Sunday:
+    //    //            return "星期日";
+    //    //        default:
+    //    //            throw new ArgumentOutOfRangeException("week", "星期值超出范围");
+    //    //    }
+    //    //}
+    //    //static string GetChineseWeekInTable(Week week)
+    //    //{
+    //    //    string[] chineseWeek = { "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日" };
+    //    //    return chineseWeek[(int)week];
+    //    //}
+    //    static void Main(string[] args)
+    //    {
+    //        SampleClass sample = new SampleClass();
+    //        var addMethod = typeof(SampleClass).GetMethod(ActionInTable(Week.Monday));
+    //    }
+
+    //    private static string ActionInTable(Week week)
+    //    {
+    //        string[] methods = { "Cleaning", "CleanCloset", "Quarrel", "Shopping", "Temp", "Temp", "Temp" };
+    //        return methods[(int)week];
+    //    }
+    //}
+    //enum Week
+    //{
+    //    Monday,
+    //    Tuesday,
+    //    Wednesday,
+    //    Thursday,
+    //    Friday,
+    //    Staturday,
+    //    Sunday
+    //}
+    //class SampleClass
+    //{
+    //    public void Cleaning()
+    //    {
+    //        Console.WriteLine("打扫");
+    //    }
+    //    public void CleanCloset()
+    //    {
+    //        Console.WriteLine("清理衣柜");
+    //    }
+    //    public void Quarrel()
+    //    {
+    //        Console.WriteLine("吵架");
+    //    }
+    //    public void Shopping()
+    //    {
+    //        Console.WriteLine("购物");
+    //    }
+    //}
+    #endregion
+
+    #region 150 使用匿名方法、Lambda表达式代替方法
+    //class Program
+    //{
+    //    static void SampleMethod()
+    //    {
+    //        List<string> list = new List<string>() { "Mike", "Rose", "Steve" };
+    //        //var mike = list.Find(new Predicate<string>(HaveLengthFive));
+    //        //var mike = list.Find(delegate (string value)
+    //        //{
+    //        //    return value.Length == 5;
+    //        //});
+    //        var mike = list.Find(i => i.Length == 5);
+    //        Console.WriteLine(mike);
+
+    //    }
+
+    //    private static bool HaveLengthFive(string value)
+    //    {
+    //        return value.Length == 5;
+    //    }
+    //}
+    #endregion
+
     #endregion
 }
