@@ -4608,4 +4608,46 @@ namespace HighQuantity
     #endregion
 
     #endregion
+
+    #region TwelfthChapter 规范开发行为
+
+    #region 154 不要过度设计，在敏捷中体会重构的乐趣
+
+    #endregion
+
+    #region 155 随生产代码一起提交单元测试
+
+    #endregion
+
+    #region 156 利用特性为应用程序提供多个版本
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        MyService service = new MyService();
+    //        service.Testing();
+    //        service.GetInfoFromNet();
+    //    }
+    //}
+    //class MyService
+    //{
+    //    [Conditional("ONLINE")]
+    //    public void Testing()
+    //    {
+    //        Console.WriteLine("完整版功能");
+    //    }
+    //    [Conditional("OFFLINE")]
+    //    [Conditional("ONLINE")]
+    //    public void GetInfoFromNet()
+    //    {
+    //        Console.WriteLine("单机版功能");
+    //    }
+    //}
+    #endregion
+
+    #region 157 从写第一个界面开始，就进行自动化测试
+
+    #endregion
+
+    #endregion
 }
