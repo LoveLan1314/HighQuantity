@@ -4565,5 +4565,47 @@ namespace HighQuantity
     //}
     #endregion
 
+    #region 151 使用事件访问器替换公开的事件成员变量
+    //class SampleClass
+    //{
+    //    EventHandlerList events = new EventHandlerList();
+    //    public event EventHandler Click
+    //    {
+    //        add
+    //        {
+    //            events.AddHandler(null, value);
+    //        }
+    //        remove
+    //        {
+    //            events.RemoveHandler(null, value);
+    //        }
+    //    }
+    //}
+    #endregion
+
+    #region 152 最少，甚至是不要注释
+
+    #endregion
+
+    #region 153 若抛出异常，则必须要注释
+    //class Program
+    //{
+    //    /// <summary>
+    //    /// 注释
+    //    /// </summary>
+    //    /// <param name="value">输入参数注释</param>
+    //    /// <returns>返回参数注释</returns>
+    //    /// <exception cref="System.IO.IOException">如果......，则抛出IOException</exception>
+    //    public string SampleClass(int value)
+    //    {
+    //        if (true)
+    //        {
+    //            throw new IOException("一些IO异常");
+    //        }
+    //        //省略
+    //    }
+    //}
+    #endregion
+
     #endregion
 }
